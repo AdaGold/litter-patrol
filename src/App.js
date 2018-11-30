@@ -27,18 +27,24 @@ class App extends Component {
     for (let i = 0; i < 9; i++){
       bins.push({ isTrashVisible: (Math.round(Math.random()) ? true : false )});
     }
-
+    console.log(bins);
     return bins;
   }
 
   onTrashClicked = () => {
-    // Fill this in!
+    //this.setState({Points: this.state.points });
+    <button
+      score={ this.state.points }
+      onClick={ this.markPresentClickHandler } >
+      Increase Points
+    </button>
+
   }
 
   render() {
     const bins = this.state.bins.map((bin, index) => {
       return (
-        <Trash key={`trash-${index}`} />
+        <Trash key={`trash-${index}`} isTrashVisible={bin.isTrashVisible} />
       );
     });
 
