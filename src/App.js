@@ -29,34 +29,36 @@ class App extends Component {
       points: 0,
     };
 
-    // Uncomment this to spawn a single test item
-    //const testItem = this.spawnItem(Date.now());
-    //this.state.items.push(testItem);
-
-    // Uncomment this to automatically spawn new items
     this.enableSpawner();
 
-    // const testItem = this.spawnItem(Date.now());
-    //     this.setState(items.push(testItem);
-  }
+    updateScore = () => {
+      let score = this.state.points;
+      score += 1;
+      this.setState({ points: score });
+    }
+  
+    markClicked = (itemIndex) => {
+      let updatedItems = this.state.items;
+      if (!updatedItems[itemIndex].isClicked) {
+        updatedItems[itemIndex].isClicked = true;
+  
+        this.setState({ items: updatedItems });
+      }
+    }
 
-  onItemClicked = () => {
-    this.setState({
-      points: this.state.points + 1
-    });
-  }
-
-  render() {
-    const items = this.state.items.map((item, i) => {
-      return <GameItem
-               height={item.height}     // Height - used for a CSS style to position on the screen
-               layer={100 + i}          // Layer - used for a CSS style to show items on-top of bg
-               key={item.id}            // Key - to help React with performance
-               type={item.type}
-               itemClickCallback = {this.onItemClicked}
-               // Additional props (event callbacks, etc.) can be passed here
-             />;
-    });
+    render() {
+      const items = this.state.items.map((item, i) => {
+        return <GameItem
+                  height={item.height}     // Height - used for a CSS style to position on the screen
+                  layer={100 + i}          // Layer - used for a CSS style to show items on-top of bg
+                  key={item.id}            // Key - to help React with performance
+                  type={item.type}
+                  key={item.id}
+                  index = {i}
+                  isClicked={false}
+                  markClickedCallback={ this.markClicked }
+                />;
+      });
 
     return (
       <div className="game">
