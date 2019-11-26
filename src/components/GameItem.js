@@ -7,20 +7,18 @@ class GameItem extends Component {
   static propTypes = {
     height: PropTypes.number.isRequired,
     layer: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired
   }
 
   onItemClicked = (event) => {
     // Fill this in for Wave 2!
     // KK: I don't need to account for when an item has already been clicked. It's not gonna change again or add another class to the class list. 
     const item = event.target;
+    if (item.classList.length < 2) {
+      (this.props.type === 'litter') ? item.classList.add('spotted-litter') : item.classList.add('spotted-nature');
     
-    if (this.props.type === 'litter') {
-      item.classList.add('spotted-litter');
-      // add 1 to score
-    } else {
-      item.classList.add('spotted-nature');
-      // remove 1 from score
-    }
+      this.props.onItemClickedCallback(this.props);  
+    }    
   }
     
   render() {
