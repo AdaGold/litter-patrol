@@ -55,9 +55,7 @@ class App extends Component {
         layer={100 + i}          // Layer - used for a CSS style to show items on-top of bg
         key={item.id}            // Key - to help React with performance
         type={item.type}
-        itemId={item.id}
         onItemClickedCallback={this.onItemClicked}
-        clicked={false}
                // Additional props (event callbacks, etc.) can be passed here
             />;
     });

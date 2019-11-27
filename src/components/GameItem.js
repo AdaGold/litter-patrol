@@ -14,11 +14,17 @@ class GameItem extends Component {
     // Fill this in for Wave 2!
     // KK: I don't need to account for when an item has already been clicked. It's not gonna change again or add another class to the class list. 
     const item = event.target;
+
+
+
     if (item.classList.length < 2) {
       (this.props.type === 'litter') ? item.classList.add('spotted-litter') : item.classList.add('spotted-nature');
     
       this.props.onItemClickedCallback(this.props);  
     }    
+
+
+    
   }
     
   render() {
