@@ -4,6 +4,12 @@ import ItemIcons from '../ItemIcons.js';
 import PropTypes from 'prop-types';
 
 class GameItem extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
   static propTypes = {
     height: PropTypes.number.isRequired,
     layer: PropTypes.number.isRequired,
@@ -15,15 +21,12 @@ class GameItem extends Component {
     // KK: I don't need to account for when an item has already been clicked. It's not gonna change again or add another class to the class list. 
     const item = event.target;
 
-
-
-    if (item.classList.length < 2) {
-      (this.props.type === 'litter') ? item.classList.add('spotted-litter') : item.classList.add('spotted-nature');
-    
+    if (!this.state.spotted) {
+      this.setState({
+        spotted: true
+      });
       this.props.onItemClickedCallback(this.props);  
-    }    
-
-
+    }
     
   }
     
@@ -35,9 +38,12 @@ class GameItem extends Component {
 
     // KK: it's getting the correct icon i think?
     const icon = ItemIcons[this.props.type];
-    
+    let className = "game-item";
+    if (this.state.spotted) {
+      className += this.props.type === "litter" ? " spotted-litter" : " spotted-nature";
+    }
     return (
-      <div className="game-item" style={itemStyle} onClick={this.onItemClicked}>
+      <div className={className} style={itemStyle} onClick={this.onItemClicked}>
         <img src={icon} alt={this.props.type} className="icon-item"></img>
       </div>
     );
