@@ -82,9 +82,14 @@ const App = (props) => {
   // Make this true to automatically spawn new items
   const spawnItems = true;
 
-  const onItemClicked = () => {
+  const onItemClicked = (id) => {
     // Fill this in for Wave 3!
 
+    const newItemList = items.filter((item) => id !== item.id)
+    if (newItemList.length < items.length) {
+      setItems(newItemList);
+      setPoints((oldPoints) => oldPoints + 1);
+    }
   }
 
   const itemComponents = items.map((item, i) => {
@@ -92,7 +97,9 @@ const App = (props) => {
       height={item.height}     // Height - used for a CSS style to position on the screen
       layer={100 + i}          // Layer - used for a CSS style to show items on-top of bg
       key={item.id}            // Key - to help React with performance
-
+      type={item.type}
+      onItemClickedCallback={onItemClicked}
+      id={item.id}
 
     // Additional props (event callbacks, etc.) can be passed here
     />;
