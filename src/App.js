@@ -84,6 +84,7 @@ const App = (props) => {
 
   const onItemClicked = () => {
     // Fill this in for Wave 3!
+
   }
 
   const itemComponents = items.map((item, i) => {
@@ -91,6 +92,7 @@ const App = (props) => {
       height={item.height}     // Height - used for a CSS style to position on the screen
       layer={100 + i}          // Layer - used for a CSS style to show items on-top of bg
       key={item.id}            // Key - to help React with performance
+
 
     // Additional props (event callbacks, etc.) can be passed here
     />;
@@ -134,8 +136,6 @@ const App = (props) => {
       }
 
       if (spawnDelta >= (1 / spawnRate) * 1000 && newItemList.length <= 30) {
-        console.log(`spawnDelta == ${ spawnDelta }`);
-        console.log(`lastSpawn == ${ lastSpawn }`);
 
         newItemList = [
           ...(newItemList || items),
