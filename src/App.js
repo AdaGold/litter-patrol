@@ -23,8 +23,6 @@ const config = {
   itemLifetime: 8 * 1000, // 8 seconds (should be longer than CSS animation time)
 };
 
-// The time an item was last spawned
-let lastSpawn = null;
 
 // Function to generate a random type of GameItem
 const randomType = () => {
@@ -53,10 +51,13 @@ const randomType = () => {
 
 
 const App = (props) => {
+  // The time an item was last spawned
+  const [lastSpawn, setLastSpawn] = useState(null);
+
   let updateTimer = null;
 
   const spawnItem = (time) => {
-    lastSpawn = time;
+    setLastSpawn(time);
 
     // Figure out what kind of item to create
     const id = uuid();
