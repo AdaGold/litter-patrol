@@ -24,7 +24,6 @@ const config = {
 };
 
 // The time an item was last spawned
-let lastSpawn = null;
 
 // Function to generate a random type of GameItem
 const randomType = () => {
@@ -54,9 +53,12 @@ const randomType = () => {
 
 const App = (props) => {
   let updateTimer = null;
+  let [lastSpawn, setLastSpawn] = useState(null);
+
 
   const spawnItem = (time) => {
-    lastSpawn = time;
+    // lastSpawn = time;
+    setLastSpawn(time);
 
     // Figure out what kind of item to create
     const id = uuid();
